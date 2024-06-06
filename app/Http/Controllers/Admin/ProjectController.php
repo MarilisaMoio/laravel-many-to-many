@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Type;
+use App\Models\Technology;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
@@ -33,8 +34,9 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
+        $techs = Technology::all();
 
-        return view('admin.projects.create', compact('types'));
+        return view('admin.projects.create', compact('types', 'techs'));
     }
 
     /**
@@ -56,6 +58,8 @@ class ProjectController extends Controller
         $newProject = new Project();
         $newProject->fill($formData);
         $newProject->save();
+
+        $newProject->technologies()->attach($formData['techs']);
 
         return redirect()->route('admin.projects.index');
     }

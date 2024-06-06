@@ -39,6 +39,18 @@
                     <label for="img" class="form-label">Immagine</label>
                     <input class="form-control" type="file" id="img" name="img">
                 </div>
+                <div class="mb-3 mt-4">
+                    <h5>Technologies</h5>
+
+                    @foreach ($techs as $tech)
+                        <div class="form-check">
+                            <input @checked(in_array($tech->id, old('techs', []))) class="form-check-input" type="checkbox" name="techs[]" value="{{ $tech->id }}" id="tech-{{ $tech->id }}">
+                            <label class="form-check-label" for="tech-{{ $tech->id }}">
+                            {{ $tech->name }}
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
                 <div class="mb-3">
                     <label for="summary" class="form-label">Sommario</label>
                     <textarea class="form-control" id="summary" rows="5" name="summary">{{ old('summary') }}</textarea>
