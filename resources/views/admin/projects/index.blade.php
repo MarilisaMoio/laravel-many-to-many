@@ -18,6 +18,7 @@
                                 <th scope="col">Commissioned by</th>
                                 <th scope="col">IMG</th>
                                 <th scope="col">Type</th>
+                                <th scope="col" style="width:100px;">Techs</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
@@ -29,6 +30,15 @@
                                     <td>{{ $project->client_name }}</td>
                                     <td>{{ $project->img ? 'YES' : 'NO' }}</td>
                                     <td>{{ $project->type_id ? $project->type->name : '---' }}</td>
+                                    <td>
+                                        @if(count($project->technologies) > 0)
+                                            @foreach($project->technologies as $tech)
+                                                <span class="badge rounded-pill bg-secondary">{{ $tech->name }}</span>
+                                            @endforeach
+                                        @else
+                                            ---
+                                        @endif
+                                    </td>
                                     <td>
                                         <a class="btn btn-success" href="{{ route('admin.projects.show', $project->id) }}">See</a>
                                         <a class="btn btn-warning" href="{{ route('admin.projects.edit', $project->id) }}">Edit</a>

@@ -12,6 +12,16 @@
                 <li class="list-group-item"><strong>ID: </strong>{{ $project->id }}</li>
                 <li class="list-group-item"><strong>Slug: </strong>/{{ $project->slug }}</li>
                 <li class="list-group-item"><strong>For: </strong>{{ $project->client_name ? $project->client_name : '---' }}</li>
+                <li class="list-group-item"><strong>Type: </strong>{{ $project->type ? $project->type->name : '---' }}</li>
+                <li class="list-group-item"><strong>Techs: </strong>
+                    @if(count($project->technologies) > 0)
+                        @foreach($project->technologies as $tech)
+                            <span class="badge rounded-pill bg-secondary">{{ $tech->name }}</span>
+                        @endforeach
+                    @else
+                        ---
+                    @endif
+                </li>
                 <li class="list-group-item"><strong>Created: </strong>{{ $project->created_at }}</li>
                 <li class="list-group-item"><strong>Updated: </strong>{{ $project->updated_at }}</li>
                 <li class="list-group-item">
